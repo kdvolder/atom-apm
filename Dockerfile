@@ -28,6 +28,7 @@ RUN \
     apt-get install -fyqq \
     ${atomBuildDependencies}\
     ${atomDependencies}\
+    jq\
     --no-install-recommends > /dev/null \
     # Download and install atom in the version specified
  && curl -sL -o ${atomDownloadName} ${atomDownloadLink} \
