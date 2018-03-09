@@ -1,11 +1,11 @@
 # Atom Docker Image For Package Testing
-FROM ubuntu:trusty
-MAINTAINER Lukas Eipert <leipert@users.noreply.github.com>
+FROM ubuntu:xenial
+LABEL maintainer="Kris De Volder <kdevolder@pivotal.io>"
 
 ADD ./dpkg-dep.sh .
 
 ENV atomDownloadLink \
-https://github.com/atom/atom/releases/download/v1.3.1/atom-amd64.deb
+https://github.com/atom/atom/releases/download/v1.24.0/atom-amd64.deb
 
 ENV atomDownloadName \
 atom-amd64.deb
@@ -55,11 +55,9 @@ RUN \
  && ln -s /usr/share/atom/resources/app/apm/node_modules/.bin/npm \
     /usr/local/bin/npm \
  && ln -s /usr/share/atom/resources/app/apm/node_modules/.bin/npm /usr/bin/npm \
-    # Install grunt and gulp.
- && npm i -g gulp grunt-cli > /dev/null \
  && npm cache clean \
-    # Test if node, npm, gulp && grunt works
- && node --version && npm --version  && gulp --version && grunt --version
+    # Test if node and npm works
+ && node --version && npm --version
 
 CMD \
     echo "`git --version`"\
